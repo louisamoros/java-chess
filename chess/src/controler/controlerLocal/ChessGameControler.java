@@ -1,5 +1,6 @@
 package controler.controlerLocal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Coord;
@@ -12,6 +13,7 @@ public class ChessGameControler implements ChessGameControlers {
 	public ChessGameControler(ChessGame cG) {
 		super();
 		chessGame = cG;
+		coordonnees = new ArrayList<Coord>();
 	}
 	
 	public String getMessage() {

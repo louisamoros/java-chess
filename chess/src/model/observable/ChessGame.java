@@ -9,7 +9,7 @@ import model.Echiquier;
 
 public class ChessGame extends Observable{
 	
-	private static boolean isInstance;
+	private static ChessGame instance = null;
 	private Echiquier echiquier;
 	private ChessGameControlers controler;
 		
@@ -22,12 +22,10 @@ public class ChessGame extends Observable{
 	
 	//make sure we have only one instance of Chessgame
 	public static ChessGame getInstance(){
-		if(!isInstance){
-			isInstance = true;
-			return new ChessGame();
-		}
-		else
-			return null;
+		if(instance == null)
+			instance = new ChessGame();
+			
+		return instance;
 	}
 	
 	/**
