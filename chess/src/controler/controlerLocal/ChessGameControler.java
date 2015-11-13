@@ -21,9 +21,7 @@ public class ChessGameControler implements ChessGameControlers {
 		return chessGame.toString();
 	}
 	
-	public List<Coord> move(Coord coordX, Coord coordY) {
-		coordonnees.add(coordX);
-		coordonnees.add(coordY);
-		return coordonnees;
+	public void move(Coord coordInit, Coord coordFinal) {
+		chessGame.move(coordInit.x, coordInit.y, coordFinal.x, coordFinal.y);
 	}
 }
