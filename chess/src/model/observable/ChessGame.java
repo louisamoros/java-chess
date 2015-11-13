@@ -3,6 +3,7 @@ package model.observable;
 import java.util.Observable;
 
 import controler.controlerLocal.ChessGameControler;
+import controler.controlerLocal.ChessGameControlers;
 import vue.ChessGameCmdLine;
 import model.Echiquier;
 
@@ -10,15 +11,22 @@ public class ChessGame extends Observable{
 	
 	private static boolean isInstance;
 	private Echiquier echiquier;
+	private ChessGameControlers controler;
+		
 	
 	private ChessGame(){
 		super();
 		//creation de l'echiquier
 		echiquier = new Echiquier();
+		controler = new ChessGameControler();
+		
+		//add 2 views as observer
+		addObserver(new ChessGameCmdLine((ChessGameControler)controler));
+		addObserver(new ChessGameCmdLine((ChessGameControler)controler));
 	}
 	
 	//make sure we have only one instance of Chessgame
-	public ChessGame getInstance(){
+	public static ChessGame getInstance(){
 		if(!isInstance){
 			isInstance = true;
 			return new ChessGame();
@@ -40,7 +48,6 @@ public class ChessGame extends Observable{
 	}
 	
 	public String toString(){
-		//todo
 		return echiquier.toString();
 	}
 }

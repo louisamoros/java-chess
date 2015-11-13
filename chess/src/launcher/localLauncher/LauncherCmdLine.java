@@ -16,7 +16,7 @@ public class LauncherCmdLine {
 		ChessGame chessGame;
 		ChessGameControler chessGameControler;		
 		
-		chessGame = new ChessGame();	
+		chessGame = ChessGame.getInstance();	
 		chessGameControler = new ChessGameControler(chessGame);
 		
 		new ChessGameCmdLine(chessGameControler);	
