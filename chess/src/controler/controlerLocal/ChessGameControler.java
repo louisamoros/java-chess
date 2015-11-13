@@ -6,13 +6,17 @@ import model.Coord;
 import model.observable.ChessGame;
 
 public class ChessGameControler implements ChessGameControlers {
-	private String message;
 	private List<Coord> coordonnees;
 	private ChessGame chessGame;
 	
+	public ChessGameControler(ChessGame cG) {
+		super();
+		chessGame = cG;
+	}
+	
 	public String getMessage() {
-		//message = chessGame all messages no matter what it is.
-		return null;
+		// Return to string of Instance chessGame
+		return chessGame.toString();
 	}
 	
 	public List<Coord> move(Coord coordX, Coord coordY) {
