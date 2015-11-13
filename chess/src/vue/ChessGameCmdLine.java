@@ -3,9 +3,8 @@ package vue;
 import java.util.Observable;
 import java.util.Observer;
 
-import controler.controlerLocal.ChessGameControler;
 import model.Coord;
-import model.observable.ChessGame;
+import controler.controlerLocal.ChessGameControler;
 
 
 
