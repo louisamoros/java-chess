@@ -7,13 +7,11 @@ import model.Coord;
 import model.observable.ChessGame;
 
 public class ChessGameControler implements ChessGameControlers {
-	private List<Coord> coordonnees;
 	private ChessGame chessGame;
 	
 	public ChessGameControler(ChessGame cG) {
 		super();
 		chessGame = cG;
-		coordonnees = new ArrayList<Coord>();
 	}
 	
 	public String getMessage() {
