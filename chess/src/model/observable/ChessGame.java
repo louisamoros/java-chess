@@ -2,17 +2,12 @@ package model.observable;
 
 import java.util.Observable;
 
-import controler.controlerLocal.ChessGameControler;
-import controler.controlerLocal.ChessGameControlers;
-import vue.ChessGameCmdLine;
 import model.Echiquier;
 
 public class ChessGame extends Observable{
 	
 	private static ChessGame instance = null;
 	private Echiquier echiquier;
-	private ChessGameControlers controler;
-		
 	
 	private ChessGame(){
 		super();
