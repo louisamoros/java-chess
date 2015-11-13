@@ -18,11 +18,6 @@ public class ChessGame extends Observable{
 		super();
 		//creation de l'echiquier
 		echiquier = new Echiquier();
-		controler = new ChessGameControler();
-		
-		//add 2 views as observer
-		addObserver(new ChessGameCmdLine((ChessGameControler)controler));
-		addObserver(new ChessGameCmdLine((ChessGameControler)controler));
 	}
 	
 	//make sure we have only one instance of Chessgame

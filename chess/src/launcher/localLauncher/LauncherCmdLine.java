@@ -19,7 +19,8 @@ public class LauncherCmdLine {
 		chessGame = ChessGame.getInstance();	
 		chessGameControler = new ChessGameControler(chessGame);
 		
-		new ChessGameCmdLine(chessGameControler);	
+		ChessGameCmdLine o = new ChessGameCmdLine(chessGameControler);	
+		chessGame.addObserver(o);
 	}
 
 }
