@@ -30,8 +30,10 @@ public class ChessGame extends Observable{
 	 */
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal){
 		if(echiquier.isMoveOk(xInit, yInit, xFinal, yFinal))
-			if(echiquier.move(xInit, yInit, xFinal, yFinal))
+			if(echiquier.move(xInit, yInit, xFinal, yFinal)){
+				echiquier.switchJoueur();
 				return true;
+			}
 		return false;
 	}
 	
