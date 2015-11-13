@@ -22,5 +22,4 @@ public class LauncherCmdLine {
 		ChessGameCmdLine o = new ChessGameCmdLine(chessGameControler);	
 		chessGame.addObserver(o);
 	}
-
 }
