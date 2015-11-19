@@ -4,6 +4,7 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
+import controler.controlerLocal.ChessGameControler;
 import model.observable.ChessGame;
 import vue.ChessGameGUI;
 
@@ -13,7 +14,9 @@ public class LauncherGUI {
 		ChessGame chessGame;
 		chessGame = ChessGame.getInstance();
 
-		JFrame frame = new ChessGameGUI();
+		ChessGameControler chessGameControler = new ChessGameControler(chessGame);
+		
+		JFrame frame = new ChessGameGUI(chessGameControler);
 		frame.pack();
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
