@@ -25,7 +25,7 @@ public class LauncherGUI {
 
 		chessGame.addObserver(obs);
 		
-		obs.update(chessGame, null);
+		//obs.update(chessGame, null);
 	}
 
 }
