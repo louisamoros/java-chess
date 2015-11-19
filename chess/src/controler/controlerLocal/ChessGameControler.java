@@ -1,8 +1,5 @@
 package controler.controlerLocal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Coord;
 import model.observable.ChessGame;
 
