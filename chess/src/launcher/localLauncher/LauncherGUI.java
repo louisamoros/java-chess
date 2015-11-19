@@ -14,12 +14,15 @@ public class LauncherGUI {
 		chessGame = ChessGame.getInstance();
 
 		JFrame frame = new ChessGameGUI();
+		Observer obs = (Observer) frame;
 		frame.pack();
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
-		chessGame.addObserver((Observer) frame);
+		chessGame.addObserver(obs);
+		
+		obs.update(chessGame, null);
 	}
 
 }
