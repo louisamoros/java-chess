@@ -45,4 +45,8 @@ public class ChessGame extends Observable{
 	public String toString(){
 		return echiquier.toString();
 	}
+	
+	public void notifyObservers() {
+		super.notifyObservers(this.echiquier.getPiecesIHM());
+	}
 }
