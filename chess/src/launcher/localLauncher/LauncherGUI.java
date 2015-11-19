@@ -17,15 +17,12 @@ public class LauncherGUI {
 		ChessGameControler chessGameControler = new ChessGameControler(chessGame);
 		
 		JFrame frame = new ChessGameGUI(chessGameControler);
-		Observer obs = (Observer) frame;
+		chessGame.addObserver((Observer) frame);
+		chessGame.notifyObservers();
+
 		frame.pack();
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-
-		chessGame.addObserver(obs);
-		
-		//obs.update(chessGame, null);
 	}
-
 }

@@ -37,12 +37,16 @@ public class ChessGame extends Observable{
 				isOk = true;
 			}
 		}
-		instance.setChanged();
 		instance.notifyObservers();
 		return isOk;
 	}
 	
 	public String toString(){
 		return echiquier.toString();
+	}
+	
+	public void notifyObservers() {
+		instance.setChanged();
+		super.notifyObservers(this.echiquier.getPiecesIHM());
 	}
 }
