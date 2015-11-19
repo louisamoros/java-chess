@@ -143,15 +143,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 	}
 
-	public static void main(String[] args) {
-		JFrame frame = new ChessGameGUI();
-		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		frame.pack();
-		frame.setResizable(true);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
-
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
