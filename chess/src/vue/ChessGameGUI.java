@@ -9,6 +9,9 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,6 +22,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import model.Coord;
+import model.PieceIHM;
+import tools.ChessImageProvider;
 import controler.controlerLocal.ChessGameControler;
 
 public class ChessGameGUI extends JFrame implements MouseListener,
@@ -27,7 +32,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final short IDX_CASE_MAX = 63;
 	ChessGameControler chessGameControler;
 	JLayeredPane layeredPane;
 	JPanel chessBoard;
@@ -65,20 +69,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 			else
 				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
 		}
-
-		JLabel piece = new JLabel(new ImageIcon(
-				"./res/images/cavalierBlancS.png"));
-		JPanel panel = (JPanel) chessBoard.getComponent(0);
-		panel.add(piece);
-		piece = new JLabel(new ImageIcon("./res/images/cavalierBlancS.png"));
-		panel = (JPanel) chessBoard.getComponent(15);
-		panel.add(piece);
-		piece = new JLabel(new ImageIcon("./res/images/cavalierBlancS.png"));
-		panel = (JPanel) chessBoard.getComponent(16);
-		panel.add(piece);
-		piece = new JLabel(new ImageIcon("./res/images/cavalierBlancS.png"));
-		panel = (JPanel) chessBoard.getComponent(20);
-		panel.add(piece);
 
 	}
 
@@ -146,8 +136,30 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		System.out.println("View is updated.");
-		System.out.println(o);
+
+		JLabel piece;
+		JPanel panel;
+		List<PieceIHM> list = (ArrayList<PieceIHM>) arg;
+
+		Iterator<PieceIHM> iterator = list.iterator();
+
+		while (iterator.hasNext()) {
+			PieceIHM pihm = iterator.next();
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile(
+					pihm.getTypePiece(), pihm.getCouleur())));
+			for (int j = 0; j < pihm.getList().size(); j++) {
+				Iterator<Coord> iteratorCoord = pihm.getList().iterator();
+				while (iteratorCoord.hasNext()) {
+					piece = new JLabel(new ImageIcon(
+							ChessImageProvider.getImageFile(
+									pihm.getTypePiece(), pihm.getCouleur())));
+					int value = iteratorCoord.next().x + 8
+							* iteratorCoord.next().y;
+					panel = (JPanel) chessBoard.getComponent(value);
+					panel.add(piece);
+				}
+			}
+		}
+
 	}
 }

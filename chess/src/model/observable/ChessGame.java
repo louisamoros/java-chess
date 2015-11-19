@@ -37,7 +37,6 @@ public class ChessGame extends Observable{
 				isOk = true;
 			}
 		}
-		instance.setChanged();
 		instance.notifyObservers();
 		return isOk;
 	}
@@ -47,6 +46,7 @@ public class ChessGame extends Observable{
 	}
 	
 	public void notifyObservers() {
+		instance.setChanged();
 		super.notifyObservers(this.echiquier.getPiecesIHM());
 	}
 }

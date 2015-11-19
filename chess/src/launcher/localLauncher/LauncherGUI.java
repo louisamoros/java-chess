@@ -19,13 +19,11 @@ public class LauncherGUI {
 		JFrame frame = new ChessGameGUI(chessGameControler);
 		chessGame.addObserver((Observer) frame);
 		chessGame.notifyObservers();
-		
+
 		frame.pack();
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
-
 	}
-
 }
