@@ -1,10 +1,8 @@
 package vue;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -26,26 +24,28 @@ import javax.swing.JPanel;
 import model.Coord;
 import model.PieceIHM;
 import tools.ChessImageProvider;
-import tools.ChessPiecePos;
-
+import controler.controlerLocal.ChessGameControler;
 
 public class ChessGameGUI extends JFrame implements MouseListener,
-		MouseMotionListener, Observer{
+		MouseMotionListener, Observer {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	ChessGameControler chessGameControler;
 	JLayeredPane layeredPane;
 	JPanel chessBoard;
 	JLabel chessPiece;
+	Coord coordInit;
+	Coord coordFinal;
 	int xAdjustment;
 	int yAdjustment;
 
-	public ChessGameGUI() {
+	public ChessGameGUI(ChessGameControler chessGameCtrl) {
 		Dimension boardSize = new Dimension(600, 600);
+		this.chessGameControler = chessGameCtrl;
 
 		// Use a Layered Pane for this this application
-
 		layeredPane = new JLayeredPane();
 		getContentPane().add(layeredPane);
 		layeredPane.setPreferredSize(boardSize);
@@ -53,7 +53,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		layeredPane.addMouseMotionListener(this);
 
 		// Add a chess board to the Layered Pane
-
 		chessBoard = new JPanel();
 		layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
 		chessBoard.setLayout(new GridLayout(8, 8));
@@ -70,24 +69,14 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 			else
 				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
 		}
-		
-		/*JLabel piece;
-		JPanel panel;
-		
-		for (int i = 0; i < ChessPiecePos.values().length; i++){
-			piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(ChessPiecePos.values()[i].nom, ChessPiecePos.values()[i].couleur)));
-			for (int j = 0; j < (ChessPiecePos.values()[i].coords).length; j++) {
-				piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(ChessPiecePos.values()[i].nom, ChessPiecePos.values()[i].couleur)));
-				int value = ChessPiecePos.values()[i].coords[j].x + 8*ChessPiecePos.values()[i].coords[j].y;
-				panel = (JPanel)chessBoard.getComponent(value);
-				panel.add(piece);		
-			}
-		}*/
+
 	}
 
 	public void mousePressed(MouseEvent e) {
 		chessPiece = null;
 		Component c = chessBoard.findComponentAt(e.getX(), e.getY());
+
+		coordInit = new Coord(e.getX(), e.getY());
 
 		if (c instanceof JPanel)
 			return;
@@ -102,7 +91,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	}
 
 	// Move the chess piece around
-
 	public void mouseDragged(MouseEvent me) {
 		if (chessPiece == null)
 			return;
@@ -111,24 +99,24 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	}
 
 	// Drop the chess piece back onto the chess board
-
 	public void mouseReleased(MouseEvent e) {
 		if (chessPiece == null)
 			return;
-
 		chessPiece.setVisible(false);
-		Component c = chessBoard.findComponentAt(e.getX(), e.getY());
 
-		if (c instanceof JLabel) {
-			Container parent = c.getParent();
-			parent.remove(0);
-			parent.add(chessPiece);
-		} else {
-			Container parent = (Container) c;
-			parent.add(chessPiece);
-		}
+		coordFinal = new Coord(e.getX(), e.getY());
+		chessGameControler.move(coordInit, coordFinal);
 
-		chessPiece.setVisible(true);
+		// Component c = chessBoard.findComponentAt(e.getX(), e.getY());
+		// if (c instanceof JLabel) {
+		// Container parent = c.getParent();
+		// parent.remove(0);
+		// parent.add(chessPiece);
+		// } else {
+		// Container parent = (Container) c;
+		// parent.add(chessPiece);
+		// }
+		// chessPiece.setVisible(true);
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -152,21 +140,26 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		JLabel piece;
 		JPanel panel;
 		List<PieceIHM> list = (ArrayList<PieceIHM>) arg;
-		
+
 		Iterator<PieceIHM> iterator = list.iterator();
-		
-		while(iterator.hasNext()) {
+
+		while (iterator.hasNext()) {
 			PieceIHM pihm = iterator.next();
-			piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(pihm.getTypePiece(), pihm.getCouleur())));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile(
+					pihm.getTypePiece(), pihm.getCouleur())));
 			for (int j = 0; j < pihm.getList().size(); j++) {
 				Iterator<Coord> iteratorCoord = pihm.getList().iterator();
-				while(iteratorCoord.hasNext()){
-					piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(pihm.getTypePiece(), pihm.getCouleur())));
-					int value = iteratorCoord.next().x + 8*iteratorCoord.next().y;
-					panel = (JPanel)chessBoard.getComponent(value);
+				while (iteratorCoord.hasNext()) {
+					piece = new JLabel(new ImageIcon(
+							ChessImageProvider.getImageFile(
+									pihm.getTypePiece(), pihm.getCouleur())));
+					int value = iteratorCoord.next().x + 8
+							* iteratorCoord.next().y;
+					panel = (JPanel) chessBoard.getComponent(value);
 					panel.add(piece);
-				}	
+				}
 			}
-	    }	
+		}
+
 	}
 }

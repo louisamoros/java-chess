@@ -29,12 +29,17 @@ public class ChessGame extends Observable{
 	 * effectue aussi le changement de joueur si le déplacement est OK
 	 */
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal){
-		if(echiquier.isMoveOk(xInit, yInit, xFinal, yFinal))
-			if(echiquier.move(xInit, yInit, xFinal, yFinal)){
+		boolean isOk = false;
+
+		if(echiquier.isMoveOk(xInit, yInit, xFinal, yFinal)) {
+			if(echiquier.move(xInit, yInit, xFinal, yFinal)) {
 				echiquier.switchJoueur();
-				return true;
+				isOk = true;
 			}
-		return false;
+		}
+		instance.setChanged();
+		instance.notifyObservers();
+		return isOk;
 	}
 	
 	public String toString(){
