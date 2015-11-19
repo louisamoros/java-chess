@@ -11,6 +11,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,13 +20,17 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import model.Couleur;
+import tools.ChessImageProvider;
+
 
 public class ChessGameGUI extends JFrame implements MouseListener,
-		MouseMotionListener {
+		MouseMotionListener, Observer{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final short IDX_CASE_MAX = 63;
 	JLayeredPane layeredPane;
 	JPanel chessBoard;
 	JLabel chessPiece;
@@ -56,26 +62,23 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 			int row = (i / 8) % 2;
 			if (row == 0)
-				square.setBackground(i % 2 == 0 ? Color.blue : Color.white);
+				square.setBackground(i % 2 == 0 ? Color.black : Color.white);
 			else
-				square.setBackground(i % 2 == 0 ? Color.white : Color.blue);
+				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
 		}
 
-		// Add a few pieces to the board
-
-		JLabel piece = new JLabel(new ImageIcon(
-				"./res/images/roiNoirS.png"));
-		JPanel panel = (JPanel) chessBoard.getComponent(0);
+		JLabel piece;
+		JPanel panel;
+		// add black and white pieces;
+		// add towers
+		piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.BLANC)));
+		panel = (JPanel) chessBoard.getComponent(0);
 		panel.add(piece);
-		piece = new JLabel(new ImageIcon("./res/images/roiReineS.png"));
-		panel = (JPanel) chessBoard.getComponent(15);
+		piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.NOIR)));
+		panel = (JPanel) chessBoard.getComponent(IDX_CASE_MAX);
 		panel.add(piece);
-		piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/king.jpg"));
-		panel = (JPanel) chessBoard.getComponent(16);
-		panel.add(piece);
-		piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/camel.jpg"));
-		panel = (JPanel) chessBoard.getComponent(20);
-		panel.add(piece);
+		
+		// add black and white pions
 
 	}
 
@@ -147,5 +150,11 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }
