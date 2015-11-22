@@ -30,14 +30,14 @@ public class ChessGame extends Observable{
 	 */
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal){
 		boolean isOk = false;
-
 		if(echiquier.isMoveOk(xInit, yInit, xFinal, yFinal)) {
 			if(echiquier.move(xInit, yInit, xFinal, yFinal)) {
 				echiquier.switchJoueur();
 				isOk = true;
 			}
 		}
-		instance.notifyObservers();
+		System.out.println(this.echiquier.getMessage());
+		instance.setChangedAndNotify();
 		return isOk;
 	}
 	
@@ -45,8 +45,12 @@ public class ChessGame extends Observable{
 		return echiquier.toString();
 	}
 	
-	public void notifyObservers() {
+	public void setChangedAndNotify() {
 		instance.setChanged();
+		instance.notifyObservers();
+	}
+	
+	public void notifyObservers() {
 		super.notifyObservers(this.echiquier.getPiecesIHM());
 	}
 }

@@ -15,10 +15,9 @@ public class LauncherGUI {
 		chessGame = ChessGame.getInstance();
 
 		ChessGameControler chessGameControler = new ChessGameControler(chessGame);
-		
 		JFrame frame = new ChessGameGUI(chessGameControler);
 		chessGame.addObserver((Observer) frame);
-		chessGame.notifyObservers();
+		chessGame.setChangedAndNotify();
 
 		frame.pack();
 		frame.setResizable(true);

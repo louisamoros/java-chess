@@ -3,15 +3,16 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,9 +22,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import tools.ChessImageProvider;
 import model.Coord;
 import model.PieceIHM;
-import tools.ChessImageProvider;
 import controler.controlerLocal.ChessGameControler;
 
 public class ChessGameGUI extends JFrame implements MouseListener,
@@ -36,23 +37,24 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	JLayeredPane layeredPane;
 	JPanel chessBoard;
 	JLabel chessPiece;
+	Dimension boardSize;
 	Coord coordInit;
 	Coord coordFinal;
 	int xAdjustment;
 	int yAdjustment;
 
 	public ChessGameGUI(ChessGameControler chessGameCtrl) {
-		Dimension boardSize = new Dimension(600, 600);
 		this.chessGameControler = chessGameCtrl;
-
+		this.boardSize = new Dimension(600, 600);
+		
 		// Use a Layered Pane for this this application
-		layeredPane = new JLayeredPane();
-		getContentPane().add(layeredPane);
-		layeredPane.setPreferredSize(boardSize);
-		layeredPane.addMouseListener(this);
-		layeredPane.addMouseMotionListener(this);
+		initializeLayeredPane();
 
 		// Add a chess board to the Layered Pane
+		initializeChessBoard();
+	}
+
+	private void initializeChessBoard() {
 		chessBoard = new JPanel();
 		layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
 		chessBoard.setLayout(new GridLayout(8, 8));
@@ -69,7 +71,14 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 			else
 				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
 		}
+	}
 
+	private void initializeLayeredPane() {
+		layeredPane = new JLayeredPane();
+		getContentPane().add(layeredPane);
+		layeredPane.setPreferredSize(boardSize);
+		layeredPane.addMouseListener(this);
+		layeredPane.addMouseMotionListener(this);
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -105,18 +114,9 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		chessPiece.setVisible(false);
 
 		coordFinal = new Coord(e.getX(), e.getY());
+		System.out.println(coordInit);
+		System.out.println(coordFinal);
 		chessGameControler.move(coordInit, coordFinal);
-
-		// Component c = chessBoard.findComponentAt(e.getX(), e.getY());
-		// if (c instanceof JLabel) {
-		// Container parent = c.getParent();
-		// parent.remove(0);
-		// parent.add(chessPiece);
-		// } else {
-		// Container parent = (Container) c;
-		// parent.add(chessPiece);
-		// }
-		// chessPiece.setVisible(true);
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -136,30 +136,24 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 	@Override
 	public void update(Observable o, Object arg) {
-
 		JLabel piece;
 		JPanel panel;
-		List<PieceIHM> list = (ArrayList<PieceIHM>) arg;
+		LinkedList<PieceIHM> linkedList = (LinkedList<PieceIHM>) arg;
 
-		Iterator<PieceIHM> iterator = list.iterator();
+		for (ListIterator<PieceIHM> listIterator = linkedList.listIterator(); listIterator
+				.hasNext();) {
+			PieceIHM pIHM = listIterator.next();
 
-		while (iterator.hasNext()) {
-			PieceIHM pihm = iterator.next();
-			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile(
-					pihm.getTypePiece(), pihm.getCouleur())));
-			for (int j = 0; j < pihm.getList().size(); j++) {
-				Iterator<Coord> iteratorCoord = pihm.getList().iterator();
-				while (iteratorCoord.hasNext()) {
-					piece = new JLabel(new ImageIcon(
-							ChessImageProvider.getImageFile(
-									pihm.getTypePiece(), pihm.getCouleur())));
-					int value = iteratorCoord.next().x + 8
-							* iteratorCoord.next().y;
-					panel = (JPanel) chessBoard.getComponent(value);
-					panel.add(piece);
-				}
+			for (ListIterator<Coord> coordIterator = pIHM.getList()
+					.listIterator(); coordIterator.hasNext();) {
+				Coord pCoord = coordIterator.next();
+				piece = new JLabel(new ImageIcon(
+						ChessImageProvider.getImageFile(pIHM.getTypePiece(),
+								pIHM.getCouleur())));
+				int value = pCoord.x + 8 * pCoord.y;
+				panel = (JPanel) chessBoard.getComponent(value);
+				panel.add(piece);
 			}
 		}
-
 	}
 }
