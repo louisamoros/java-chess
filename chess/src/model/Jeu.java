@@ -273,9 +273,7 @@ public class Jeu  {
 	 */
 	private Pieces findPiece(int x, int y){
 		Pieces pieceToFind = null;
-		System.out.println(x + "," + y);
 		for (Pieces piece : pieces){
-			System.out.println(piece + "[" + piece.getX() + "," + piece.getY() + "]");
 			if (piece.getX()==x && piece.getY()==y){
 				pieceToFind = piece;
 			}

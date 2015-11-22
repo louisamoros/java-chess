@@ -67,9 +67,9 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 			int row = (i / 8) % 2;
 			if (row == 0)
-				square.setBackground(i % 2 == 0 ? Color.black : Color.white);
-			else
 				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
+			else
+				square.setBackground(i % 2 == 0 ? Color.black : Color.white);
 		}
 	}
 
@@ -85,15 +85,15 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		chessPiece = null;
 		Component c = chessBoard.findComponentAt(e.getX(), e.getY());
 
-		coordInit = new Coord(e.getX(), e.getY());
-
 		if (c instanceof JPanel)
 			return;
 
 		Point parentLocation = c.getParent().getLocation();
+		coordInit = new Coord(parentLocation.x, parentLocation.y);
 		xAdjustment = parentLocation.x - e.getX();
 		yAdjustment = parentLocation.y - e.getY();
 		chessPiece = (JLabel) c;
+		
 		chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
 		layeredPane.add(chessPiece, JLayeredPane.DRAG_LAYER);
@@ -109,13 +109,25 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 	// Drop the chess piece back onto the chess board
 	public void mouseReleased(MouseEvent e) {
+		System.out.println(chessPiece);
 		if (chessPiece == null)
 			return;
-		chessPiece.setVisible(false);
-
-		coordFinal = new Coord(e.getX(), e.getY());
-		System.out.println(coordInit);
-		System.out.println(coordFinal);
+		
+		chessPiece.setVisible(false);	
+		Component c = chessBoard.findComponentAt(e.getX(), e.getY());
+		Point parentLocation;
+		
+		if (c instanceof JLabel) {
+			System.out.println("yes");
+			Container parent = c.getParent();
+			parentLocation = parent.getLocation();
+		} else {
+			System.out.println("no");
+			Container parent = (Container) c;
+			parentLocation = parent.getLocation();
+		 }
+		
+		coordFinal = new Coord(parentLocation.x, parentLocation.y);
 		chessGameControler.move(coordInit, coordFinal);
 	}
 
@@ -139,7 +151,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		JLabel piece;
 		JPanel panel;
 		LinkedList<PieceIHM> linkedList = (LinkedList<PieceIHM>) arg;
-
+		System.out.println(chessGameControler.getMessage());
 		for (ListIterator<PieceIHM> listIterator = linkedList.listIterator(); listIterator
 				.hasNext();) {
 			PieceIHM pIHM = listIterator.next();

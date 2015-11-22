@@ -17,6 +17,14 @@ public class ChessGameControler implements ChessGameControlers {
 	}
 	
 	public void move(Coord coordInit, Coord coordFinal) {
+		
+		// Adapt coords
+		coordInit.x = coordInit.x / 75;
+		coordFinal.x = coordFinal.x / 75;
+		coordInit.y = coordInit.y / 75;
+		coordFinal.y = coordFinal.y / 75;
+		
+		System.out.println("Move from " + coordInit + " to " + coordFinal);
 		chessGame.move(coordInit.x, coordInit.y, coordFinal.x, coordFinal.y);
 	}
 }

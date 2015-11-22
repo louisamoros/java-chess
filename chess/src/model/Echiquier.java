@@ -101,10 +101,6 @@ public class Echiquier {
 
 		//	s'il n'existe pas de piece du jeu courant aux coordonnées initiales --> false
 		this.isPieceToMoveOk = jeuCourant.isPieceHere(xInit, yInit)	;
-		System.out.println(this.jeuCourant);
-		System.out.println(this.isPieceToMoveOk);
-		System.out.println(xInit);
-		System.out.println(yInit);
 		if (!this.isPieceToMoveOk) {
 			this.isMoveOk = false;
 			this.setMessage("KO : c'est au tour de l'autre joueur");
