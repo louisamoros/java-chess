@@ -4,9 +4,9 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
-import controler.controlerLocal.ChessGameControler;
 import model.observable.ChessGame;
 import vue.ChessGameGUI;
+import controler.controlerLocal.ChessGameControler;
 
 public class LauncherGUI {
 	public static void main(String[] args) {
@@ -14,12 +14,16 @@ public class LauncherGUI {
 		ChessGame chessGame;
 		chessGame = ChessGame.getInstance();
 
-		ChessGameControler chessGameControler = new ChessGameControler(chessGame);
+		ChessGameControler chessGameControler = new ChessGameControler(
+				chessGame);
 		JFrame frame = new ChessGameGUI(chessGameControler);
+
 		chessGame.addObserver((Observer) frame);
 		chessGame.setChangedAndNotify();
 
 		frame.pack();
 		frame.setVisible(true);
+		frame.setResizable(false);
+
 	}
 }
