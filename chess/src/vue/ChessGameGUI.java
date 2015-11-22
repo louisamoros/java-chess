@@ -152,6 +152,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		JPanel panel;
 		LinkedList<PieceIHM> linkedList = (LinkedList<PieceIHM>) arg;
 		System.out.println(chessGameControler.getMessage());
+
 		for (ListIterator<PieceIHM> listIterator = linkedList.listIterator(); listIterator
 				.hasNext();) {
 			PieceIHM pIHM = listIterator.next();

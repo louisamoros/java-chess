@@ -20,8 +20,6 @@ public class LauncherGUI {
 		chessGame.setChangedAndNotify();
 
 		frame.pack();
-		frame.setResizable(true);
-		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 }
