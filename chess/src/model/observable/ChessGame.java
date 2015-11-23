@@ -2,6 +2,7 @@ package model.observable;
 
 import java.util.Observable;
 
+import model.Couleur;
 import model.Echiquier;
 
 public class ChessGame extends Observable{
@@ -41,6 +42,18 @@ public class ChessGame extends Observable{
 	}
 	
 	public String toString(){
+		return this.echiquier.toString();
+	}
+	
+	public Couleur getColorCurrentPlayer() {
+		return this.echiquier.getColorCurrentPlayer();
+	}
+	
+	public boolean isEnd() {
+		return this.echiquier.isEnd();
+	}
+	
+	public String getMessage(){
 		return this.echiquier.getMessage();
 	}
 	
