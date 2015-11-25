@@ -169,11 +169,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		
 		LinkedList<PieceIHM> piecesList = (LinkedList<PieceIHM>) arg;
 		
-		for(Component c : chessBoard.getComponents())
-		{
-			panel = (JPanel)c;
-			panel.removeAll();	
-		}
+		clearBoard();
 
 		for(PieceIHM currentPiece : piecesList)
 		{
@@ -189,12 +185,23 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		chessBoard.revalidate();
 		chessBoard.repaint();
 		//chessBoard.updateUI();
-		layeredPane.updateUI();
+		//layeredPane.updateUI();
 		
 		System.out.println(chessGameControler.getMessage());
 		String prepareStr = chessGameControler.getMessage() +  "<br>"  + chessInfos.getText();
 		chessInfos.setText("");
 		chessInfos.setText("<html>" + prepareStr + "</html>");
 
+	}
+	
+	private void clearBoard()
+	{
+		JPanel panel;
+		
+		for(Component c : chessBoard.getComponents())
+		{
+			panel = (JPanel)c;
+			panel.removeAll();	
+		}
 	}
 }
