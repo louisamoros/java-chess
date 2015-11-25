@@ -13,13 +13,7 @@ public class SocketIO {
 	private BufferedReader in;
 	private PrintWriter out;
 	public SocketConfig socketConfig;
-	
-	public SocketIO(boolean isServer)
-	{
-		
-	}
-	
-	
+
 	public void config()
 	{
 		socket = socketConfig.config();
