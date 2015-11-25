@@ -7,23 +7,14 @@ import model.Echiquier;
 
 public class ChessGame extends Observable{
 	
-	private static ChessGame instance = null;
 	private Echiquier echiquier;
 	
-	private ChessGame(){
+	public ChessGame(){
 		super();
 		//creation de l'echiquier
 		echiquier = new Echiquier();
 	}
-	
-	//make sure we have only one instance of Chessgame
-	public static ChessGame getInstance(){
-		if(instance == null)
-			instance = new ChessGame();
-			
-		return instance;
-	}
-	
+		
 	/**
 	 * vérifie si le déplacement est possible
 	 * effectue le déplacement s’il est possible
@@ -37,7 +28,7 @@ public class ChessGame extends Observable{
 				isOk = true;
 			}
 		}
-		instance.notifyObservers();
+		notifyObservers();
 		return isOk;
 	}
 	

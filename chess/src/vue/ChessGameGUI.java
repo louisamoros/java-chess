@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -53,13 +52,13 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		this.chessBoardSize = new Dimension(600, 600);
 		this.infoBoardSize = new Dimension(400, 600);
 		this.boardSize = new Dimension(1000, 600);
-		
+
 		// Use a Layered Pane for this this application
 		initializeLayeredPane();
 
 		// Add a chess board to the Layered Pane
 		initializeChessBoard();
-		
+
 		// Add a info board to the Layered Pane
 		initializeInfoBoard();
 	}
@@ -69,7 +68,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		layeredPane.add(infoBoard, JLayeredPane.DEFAULT_LAYER);
 		infoBoard.setLayout(new FlowLayout(FlowLayout.LEFT));
 		infoBoard.setPreferredSize(infoBoardSize);
-		infoBoard.setBounds(chessBoardSize.width, 0, infoBoardSize.width, infoBoardSize.height);
+		infoBoard.setBounds(chessBoardSize.width, 0, infoBoardSize.width,
+				infoBoardSize.height);
 		infoBoard.setBackground(Color.orange);
 		infoBoard.add(chessInfos);
 	}
@@ -113,7 +113,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		xAdjustment = parentLocation.x - e.getX();
 		yAdjustment = parentLocation.y - e.getY();
 		chessPiece = (JLabel) c;
-		
+
 		chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
 		layeredPane.add(chessPiece, JLayeredPane.DRAG_LAYER);
@@ -131,20 +131,20 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	public void mouseReleased(MouseEvent e) {
 		if (chessPiece == null)
 			return;
-		
-		chessPiece.setVisible(false);	
+
+		chessPiece.setVisible(false);
 		Component c = chessBoard.findComponentAt(e.getX(), e.getY());
 		Point parentLocation;
-		
+
 		if (c instanceof JLabel) {
 			Container parent = c.getParent();
 			parentLocation = parent.getLocation();
 		} else {
 			Container parent = (Container) c;
 			parentLocation = parent.getLocation();
-		 }
-		
-		coordFinal = new Coord(parentLocation.x, parentLocation.y); 
+		}
+
+		coordFinal = new Coord(parentLocation.x, parentLocation.y);
 		chessGameControler.move(coordInit, coordFinal);
 	}
 
@@ -167,40 +167,40 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	public void update(Observable o, Object arg) {
 		JLabel piece;
 		JPanel panel;
-		
+
 		LinkedList<PieceIHM> piecesList = (LinkedList<PieceIHM>) arg;
-		
+
 		clearBoard();
 
-		for(PieceIHM currentPiece : piecesList)
-		{
-			for(Coord coord : currentPiece.getList())
-			{
-				piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile(currentPiece.getTypePiece(),currentPiece.getCouleur())));
+		for (PieceIHM currentPiece : piecesList) {
+			for (Coord coord : currentPiece.getList()) {
+				piece = new JLabel(new ImageIcon(
+						ChessImageProvider.getImageFile(
+								currentPiece.getTypePiece(),
+								currentPiece.getCouleur())));
 				int value = coord.x + 8 * coord.y;
 				panel = (JPanel) chessBoard.getComponent(value);
 				panel.add(piece);
 			}
 		}
-		
+
 		chessBoard.revalidate();
 		chessBoard.repaint();
-		
+
 		System.out.println(chessGameControler.getMessage());
-		String prepareStr = chessGameControler.getMessage() +  "<br>"  + chessInfos.getText();
+		String prepareStr = chessGameControler.getMessage() + "<br>"
+				+ chessInfos.getText();
 		chessInfos.setText("");
 		chessInfos.setText("<html>" + prepareStr + "</html>");
 
 	}
-	
-	private void clearBoard()
-	{
+
+	private void clearBoard() {
 		JPanel panel;
-		
-		for(Component c : chessBoard.getComponents())
-		{
-			panel = (JPanel)c;
-			panel.removeAll();	
+
+		for (Component c : chessBoard.getComponents()) {
+			panel = (JPanel) c;
+			panel.removeAll();
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
+import model.Couleur;
 import model.observable.ChessGame;
 import vue.ChessGameGUI;
 import controler.controlerLocal.ChessGameControler;
@@ -11,11 +12,14 @@ import controler.controlerLocal.ChessGameControler;
 public class LauncherGUIClient {
 	public static void main(String[] args) {
 
-		ChessGame chessGame;
-		chessGame = ChessGame.getInstance();
+		final boolean isServer = false;
+		final Couleur couleur = Couleur.NOIR;
+		
+		ChessGame chessGame = new ChessGame();
 
 		ChessGameControler chessGameControler = new ChessGameControler(
-				chessGame);
+				chessGame, isServer, couleur);
+		
 		JFrame frame = new ChessGameGUI(chessGameControler);
 
 		chessGame.addObserver((Observer) frame);
@@ -24,8 +28,5 @@ public class LauncherGUIClient {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setResizable(false);
-		
-		//Recup socket
-
 	}
 }
