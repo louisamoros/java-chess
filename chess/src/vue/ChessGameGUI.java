@@ -166,22 +166,24 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	public void update(Observable o, Object arg) {
 		JLabel piece;
 		JPanel panel;
-		LinkedList<PieceIHM> linkedList = (LinkedList<PieceIHM>) arg;
-		for (ListIterator<PieceIHM> listIterator = linkedList.listIterator(); listIterator
-				.hasNext();) {
-			PieceIHM pIHM = listIterator.next();
+		
+		LinkedList<PieceIHM> piecesList = (LinkedList<PieceIHM>) arg;
 
-			for (ListIterator<Coord> coordIterator = pIHM.getList()
-					.listIterator(); coordIterator.hasNext();) {
-				Coord pCoord = coordIterator.next();
-				piece = new JLabel(new ImageIcon(
-						ChessImageProvider.getImageFile(pIHM.getTypePiece(),
-								pIHM.getCouleur())));
-				int value = pCoord.x + 8 * pCoord.y;
+		for(PieceIHM currentPiece : piecesList)
+		{
+			for(Coord coord : currentPiece.getList())
+			{
+				piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile(currentPiece.getTypePiece(),currentPiece.getCouleur())));
+				int value = coord.x + 8 * coord.y;
 				panel = (JPanel) chessBoard.getComponent(value);
 				panel.add(piece);
 			}
 		}
+		
+		revalidate();
+		repaint();
+		
+		
 		System.out.println(chessGameControler.getMessage());
 		String prepareStr = chessGameControler.getMessage() +  "<br>"  + chessInfos.getText();
 		chessInfos.setText("");
