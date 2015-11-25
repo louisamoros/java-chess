@@ -26,6 +26,7 @@ import model.Coord;
 import model.PieceIHM;
 import tools.ChessImageProvider;
 import controler.controlerLocal.ChessGameControler;
+import controler.controlerLocal.ChessGameControlers;
 
 public class ChessGameGUI extends JFrame implements MouseListener,
 		MouseMotionListener, Observer {
@@ -33,7 +34,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ChessGameControler chessGameControler;
+	ChessGameControlers chessGameControler;
 	JLayeredPane layeredPane;
 	JPanel chessBoard;
 	JPanel infoBoard;
@@ -184,8 +185,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		
 		chessBoard.revalidate();
 		chessBoard.repaint();
-		//chessBoard.updateUI();
-		//layeredPane.updateUI();
 		
 		System.out.println(chessGameControler.getMessage());
 		String prepareStr = chessGameControler.getMessage() +  "<br>"  + chessInfos.getText();
