@@ -19,7 +19,7 @@ public class LauncherGUI {
 		JFrame frame = new ChessGameGUI(chessGameControler);
 
 		chessGame.addObserver((Observer) frame);
-		chessGame.setChangedAndNotify();
+		chessGame.notifyObservers();
 
 		frame.pack();
 		frame.setVisible(true);

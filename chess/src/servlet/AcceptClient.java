@@ -21,6 +21,7 @@ public class AcceptClient implements Runnable{
 			while(true) {
 				socket = serverSocket.accept();
 				out = new PrintWriter(socket.getOutputStream());
+				System.out.println("Client number " + nbrClients + " is connected.");
 				out.println("Client number " + nbrClients + " is connected.");
 				out.flush();
 				nbrClients++;
