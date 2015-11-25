@@ -69,8 +69,7 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			socketManager.socketConfig = new ClientSocketConfig();
 		}
 		//instanciate socketListener observable
-		SocketListener sl = new SocketListener(socketManager);
-//		sl.addObservers(this);
+		new SocketListener(socketManager).addObserver(this);
 	}
 
 	@Override
