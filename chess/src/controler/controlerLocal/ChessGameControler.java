@@ -58,6 +58,7 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			System.out.println("Fake moving because it's not your turn.");
 			chessGame.move(-1, -1, -1, -1);
 		}
+
 	}
 	
 	public void createSocket() {
@@ -76,7 +77,7 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 	}
 	
 }
