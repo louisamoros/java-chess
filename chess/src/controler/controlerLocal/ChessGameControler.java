@@ -1,24 +1,28 @@
 package controler.controlerLocal;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import model.Coord;
 import model.Couleur;
 import model.observable.ChessGame;
 import socket.ClientSocketConfig;
 import socket.ServerSocketConfig;
+import socket.SocketListener;
 import socket.SocketManager;
 
-public class ChessGameControler implements ChessGameControlers {
-	
+public class ChessGameControler implements ChessGameControlers, Observer {
+
 	private ChessGame chessGame;
 	private boolean isServer;
 	private Couleur couleur;
-	private SocketManager socketIO;
+	private SocketManager socketManager;
 
 	public ChessGameControler(ChessGame cG, boolean iS, Couleur c) {
 		super();
-		chessGame = cG;
-		couleur = c;
-		isServer = iS;
+		this.chessGame = cG;
+		this.couleur = c;
+		this.isServer = iS;
 		createSocket();
 	}
 
@@ -54,19 +58,25 @@ public class ChessGameControler implements ChessGameControlers {
 			System.out.println("Fake moving because it's not your turn.");
 			chessGame.move(-1, -1, -1, -1);
 		}
-		
-		socketIO.send("coucou toi");
 	}
 	
 	public void createSocket() {
-		socketIO = new SocketManager();
+		socketManager = new SocketManager();
 		if(isServer) {
 			//instanciate socketio / server config
-			socketIO.socketConfig = new ServerSocketConfig();
+			socketManager.socketConfig = new ServerSocketConfig();
 		} else {
 			//instanciate socketio / client config			
-			socketIO.socketConfig = new ClientSocketConfig();
+			socketManager.socketConfig = new ClientSocketConfig();
 		}
+		//instanciate socketListener observable
+		SocketListener sl = new SocketListener(socketManager);
+//		sl.addObservers(this);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
 	}
 	
 }
