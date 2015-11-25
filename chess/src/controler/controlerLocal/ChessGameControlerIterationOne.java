@@ -4,10 +4,10 @@ import model.Coord;
 import model.Couleur;
 import model.observable.ChessGame;
 
-public class ChessGameControlerServer implements ChessGameControlers {
+public class ChessGameControlerIterationOne implements ChessGameControlers {
 	private ChessGame chessGame;
 
-	public ChessGameControlerServer(ChessGame cG) {
+	public ChessGameControlerIterationOne(ChessGame cG) {
 		super();
 		chessGame = cG;
 	}

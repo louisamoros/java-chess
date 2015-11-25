@@ -1,4 +1,4 @@
-package servlet;
+package socket;
 
 import java.io.IOException;
 import java.io.PrintWriter;
