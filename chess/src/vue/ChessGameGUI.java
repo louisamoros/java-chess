@@ -143,7 +143,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 			parentLocation = parent.getLocation();
 		 }
 		
-		coordFinal = new Coord(parentLocation.x, parentLocation.y);
+		coordFinal = new Coord(parentLocation.x, parentLocation.y); 
 		chessGameControler.move(coordInit, coordFinal);
 	}
 
@@ -168,6 +168,12 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		JPanel panel;
 		
 		LinkedList<PieceIHM> piecesList = (LinkedList<PieceIHM>) arg;
+		
+		for(Component c : chessBoard.getComponents())
+		{
+			panel = (JPanel)c;
+			panel.removeAll();	
+		}
 
 		for(PieceIHM currentPiece : piecesList)
 		{
@@ -180,9 +186,10 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 			}
 		}
 		
-		revalidate();
-		repaint();
-		
+		chessBoard.revalidate();
+		chessBoard.repaint();
+		//chessBoard.updateUI();
+		layeredPane.updateUI();
 		
 		System.out.println(chessGameControler.getMessage());
 		String prepareStr = chessGameControler.getMessage() +  "<br>"  + chessInfos.getText();
