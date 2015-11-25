@@ -5,13 +5,13 @@ import model.Couleur;
 import model.observable.ChessGame;
 import socket.ClientSocketConfig;
 import socket.ServerSocketConfig;
-import socket.SocketIO;
+import socket.SocketManager;
 
 public class ChessGameControler implements ChessGameControlers {
 	private ChessGame chessGame;
 	private boolean isServer;
 	private Couleur couleur;
-	private SocketIO socketIO;
+	private SocketManager socketIO;
 
 	public ChessGameControler(ChessGame cG, boolean iS, Couleur c) {
 		super();
@@ -56,7 +56,7 @@ public class ChessGameControler implements ChessGameControlers {
 	}
 	
 	public void createSocket() {
-		socketIO = new SocketIO();
+		socketIO = new SocketManager();
 		if(isServer) {
 			//instanciate socketio / server config
 			socketIO.socketConfig = new ServerSocketConfig();

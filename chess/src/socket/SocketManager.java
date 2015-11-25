@@ -7,11 +7,9 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class SocketIO {
+public class SocketManager {
 	
 	private Socket socket;
-	private BufferedReader in;
-	private PrintWriter out;
 	public SocketConfig socketConfig;
 
 	public void config()
@@ -20,6 +18,9 @@ public class SocketIO {
 	}
 	
 	public void send(String data) {
+		
+		PrintWriter out;
+		
 		try {
 			out = new PrintWriter(socket.getOutputStream());
 			out.println(data);
@@ -28,20 +29,34 @@ public class SocketIO {
 			e.printStackTrace();
 		} 
 	}
-
-	public String receive() {
+	
+	public String waitForData()
+	{
+		BufferedReader in = null;
+		String data = null;
 		
-		String message = null;
-		
-		try {
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			message = in.readLine();
-			System.out.println(message);
-		} catch (IOException e) {
-			e.printStackTrace();
+		while(true)
+		{
+			try {
+				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(in != null)
+			{
+				try {
+					data = in.readLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				return data;
+			}
 		}
-		return message;
-		
+	}
+	
+	public Socket getSocket(){
+		return this.socket;
 	}
 	
 }
