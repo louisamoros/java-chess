@@ -12,7 +12,7 @@ public class ServerSocketConfig implements SocketConfig{
 		Socket socket = null;
 		
 		try {
-			ServerSocket serverSocket = new ServerSocket(5000);
+			ServerSocket serverSocket = new ServerSocket(1000);
 			System.out.println("Server is ready.");
 			socket = serverSocket.accept();
 		} catch (IOException e) {

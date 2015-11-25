@@ -59,6 +59,8 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			chessGame.move(-1, -1, -1, -1);
 		}
 
+		socketManager.send("coucou");
+		
 	}
 	
 	public void createSocket() {
@@ -70,13 +72,17 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			//instanciate socketio / client config			
 			socketManager.socketConfig = new ClientSocketConfig();
 		}
+		
+		socketManager.config();
+		
 		//instanciate socketListener observable
 		new SocketListener(socketManager).addObserver(this);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-
+		System.out.println("update");
+		System.out.println((String)arg);
 	}
 	
 }

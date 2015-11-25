@@ -18,7 +18,9 @@ public class SocketManager {
 		PrintWriter out;
 
 		try {
+			System.out.println(data);
 			out = new PrintWriter(socket.getOutputStream());
+			System.out.println(data);
 			out.println(data);
 			out.flush();
 		} catch (IOException e) {
