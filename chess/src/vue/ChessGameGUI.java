@@ -184,8 +184,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		
 		chessBoard.revalidate();
 		chessBoard.repaint();
-		//chessBoard.updateUI();
-		//layeredPane.updateUI();
 		
 		System.out.println(chessGameControler.getMessage());
 		String prepareStr = chessGameControler.getMessage() +  "<br>"  + chessInfos.getText();
