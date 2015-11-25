@@ -1,16 +1,17 @@
 package controler.controlerLocal;
 
-import java.net.Socket;
-
 import model.Coord;
 import model.Couleur;
 import model.observable.ChessGame;
+import socket.ClientSocketConfig;
+import socket.ServerSocketConfig;
+import socket.SocketIO;
 
 public class ChessGameControler implements ChessGameControlers {
 	private ChessGame chessGame;
 	private boolean isServer;
 	private Couleur couleur;
-	private Socket socket;
+	private SocketIO socketIO;
 
 	public ChessGameControler(ChessGame cG, boolean iS, Couleur c) {
 		super();
@@ -55,10 +56,13 @@ public class ChessGameControler implements ChessGameControlers {
 	}
 	
 	public void createSocket() {
+		socketIO = new SocketIO();
 		if(isServer) {
 			//instanciate socketio / server config
+			socketIO.socketConfig = new ServerSocketConfig();
 		} else {
 			//instanciate socketio / client config			
+			socketIO.socketConfig = new ClientSocketConfig();
 		}
 	}
 	
