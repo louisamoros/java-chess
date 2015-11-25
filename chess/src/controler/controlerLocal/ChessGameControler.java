@@ -8,6 +8,7 @@ import socket.ServerSocketConfig;
 import socket.SocketManager;
 
 public class ChessGameControler implements ChessGameControlers {
+	
 	private ChessGame chessGame;
 	private boolean isServer;
 	private Couleur couleur;
@@ -53,6 +54,8 @@ public class ChessGameControler implements ChessGameControlers {
 			System.out.println("Fake moving because it's not your turn.");
 			chessGame.move(-1, -1, -1, -1);
 		}
+		
+		socketIO.send("coucou toi");
 	}
 	
 	public void createSocket() {
