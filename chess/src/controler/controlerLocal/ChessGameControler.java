@@ -12,6 +12,7 @@ import socket.SocketListener;
 import socket.SocketManager;
 
 public class ChessGameControler implements ChessGameControlers, Observer {
+
 	private ChessGame chessGame;
 	private boolean isServer;
 	private Couleur couleur;
