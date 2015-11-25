@@ -19,25 +19,28 @@ public class SocketIO {
 		socket = socketConfig.config();
 	}
 	
-	public void send() {
+	public void send(String data) {
 		try {
 			out = new PrintWriter(socket.getOutputStream());
-			out.println("");
+			out.println(data);
 	        out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
 	}
 
-	public void receive() {
+	public String receive() {
+		
+		String message = null;
 		
 		try {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			String message = in.readLine();
+			message = in.readLine();
 			System.out.println(message);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return message;
 		
 	}
 	

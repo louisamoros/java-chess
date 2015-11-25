@@ -8,15 +8,19 @@ public class ClientSocketConfig implements SocketConfig{
 
 	@Override
 	public Socket config() {
+		
+		Socket socket = null;
+		
 		try {
-			Socket socket = new Socket(InetAddress.getLocalHost(), 5000);
+			socket = new Socket(InetAddress.getLocalHost(), 5000);
 			System.out.println("Connection requested.");
 			return socket;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		System.out.println("Connection requested.");
-		return null;
+		
+		return socket;
 	}
 	
 	
