@@ -92,6 +92,24 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
 			else
 				square.setBackground(i % 2 == 0 ? Color.black : Color.white);
+			
+			
+			/***************************************************
+			 * DEBUG CODE
+			 * TO REMOVE LATER
+			 **************************************************/
+			
+			ChessGameControler cgc = (ChessGameControler) chessGameControler;
+
+			if (row == 0)
+				square.setBackground(i % 2 == 0 ? Color.white : (cgc.isServer ? Color.black : Color.blue));
+			else
+				square.setBackground(i % 2 == 0 ? (cgc.isServer ? Color.black : Color.blue) : Color.white);
+				
+			/***************************************************
+			 * 
+			 **************************************************/		
+			
 		}
 	}
 

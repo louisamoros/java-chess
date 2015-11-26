@@ -12,17 +12,14 @@ public class ClientSocketConfig implements SocketConfig{
 		Socket socket = null;
 		
 		try {
-			socket = new Socket(InetAddress.getLocalHost(), 5000);
+			socket = new Socket("localhost", 5000);
 			System.out.println("Connection requested.");
 			return socket;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Connection requested.");
 		
 		return socket;
 	}
-	
-	
 
 }

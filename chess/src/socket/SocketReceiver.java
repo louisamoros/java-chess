@@ -6,11 +6,12 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Observable;
 
-public class SocketListener extends Observable implements Runnable {
+public class SocketReceiver extends Observable implements Runnable {
 
 	private SocketManager socketManager;
+	private String data = null;
 
-	public SocketListener(SocketManager socketIO) {
+	public SocketReceiver(SocketManager socketIO) {
 		this.socketManager = socketIO;
 	}
 
@@ -19,25 +20,29 @@ public class SocketListener extends Observable implements Runnable {
 		
 		Socket socket = socketManager.getSocket();
 		BufferedReader in = null;
-		String data = null;
 		
 		while(true)
 		{
 			try {
 				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				data = in.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			if(in != null)
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(data != null)
 			{
-				try {
-					data = in.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
+				setChanged();
 				notifyObservers(data);
 			}
 		}
+	}
+	
+	public String getData(){
+		return this.data;
 	}
 }

@@ -8,15 +8,16 @@ import model.Couleur;
 import model.observable.ChessGame;
 import socket.ClientSocketConfig;
 import socket.ServerSocketConfig;
-import socket.SocketListener;
 import socket.SocketManager;
 
 public class ChessGameControler implements ChessGameControlers, Observer {
 
 	private ChessGame chessGame;
-	private boolean isServer;
+	public boolean isServer;
 	private Couleur couleur;
 	private SocketManager socketManager;
+	
+	private String data;
 
 	public ChessGameControler(ChessGame cG, boolean iS, Couleur c) {
 		super();
@@ -51,15 +52,18 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			coordInit.y = coordInit.y / 75;
 			coordFinal.y = coordFinal.y / 75;
 
+			String data = String.valueOf(coordInit.x) + String.valueOf(coordInit.y) + String.valueOf(coordFinal.x) + String.valueOf(coordFinal.y);
+
+			socketManager.send(data);
+			
 			System.out.println("Move from " + coordInit + " to " + coordFinal);
-			chessGame.move(coordInit.x, coordInit.y, coordFinal.x, coordFinal.y);			
+			chessGame.move(coordInit.x, coordInit.y, coordFinal.x, coordFinal.y);	
+
 		} else {
 			// Simulate fake moving
 			System.out.println("Fake moving because it's not your turn.");
 			chessGame.move(-1, -1, -1, -1);
 		}
-
-		socketManager.send("coucou");
 		
 	}
 	
@@ -74,15 +78,19 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 		}
 		
 		socketManager.config();
-		
-		//instanciate socketListener observable
-		new SocketListener(socketManager).addObserver(this);
+		socketManager.socketReceiver.addObserver(this);
+	}
+	
+	public SocketManager getSocketManager()
+	{
+		return this.socketManager;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("update");
 		System.out.println((String)arg);
+		
 	}
+
 	
 }
