@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import model.Coord;
 import model.Couleur;
+import model.MoveCoords;
 import model.observable.ChessGame;
 import socket.ClientSocketConfig;
 import socket.ServerSocketConfig;
@@ -52,9 +53,8 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			coordInit.y = coordInit.y / 75;
 			coordFinal.y = coordFinal.y / 75;
 
-			String data = String.valueOf(coordInit.x) + String.valueOf(coordInit.y) + String.valueOf(coordFinal.x) + String.valueOf(coordFinal.y);
-
-			socketManager.send(data);
+			MoveCoords moveCoords = new MoveCoords(coordInit, coordFinal);
+			socketManager.send((Object)moveCoords);
 			
 			System.out.println("Move from " + coordInit + " to " + coordFinal);
 			chessGame.move(coordInit.x, coordInit.y, coordFinal.x, coordFinal.y);	
@@ -88,7 +88,12 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println((String)arg);
+
+		MoveCoords moveCoords = (MoveCoords) arg;
+		
+		//make the opponent's move
+		chessGame.move(moveCoords.getInitCoords().x, moveCoords.getInitCoords().y, moveCoords.getFinalCoords().x, moveCoords.getFinalCoords().y);
+		System.out.println("Opponent moves from " + moveCoords.getInitCoords() + " to " + moveCoords.getFinalCoords());
 		
 	}
 

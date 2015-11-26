@@ -1,6 +1,7 @@
 package socket;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -18,22 +19,24 @@ public class SocketManager {
 		rX.start();
 	}
 
-	public void send(String data) {
+	public void send(Object data) {
 
-		PrintWriter out;
+		//PrintWriter out;
+		ObjectOutputStream outputStream;
 
 		try {
-			//System.out.println(data);
-			out = new PrintWriter(socket.getOutputStream());
-			//System.out.println(data);
+			/*out = new PrintWriter(socket.getOutputStream());
 			out.println(data);
-			out.flush();
+			out.flush();*/
+			outputStream = new ObjectOutputStream(socket.getOutputStream());
+			outputStream.writeObject(data);		
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void receive(String data)
+	public void receive(Object data)
 	{
 		data = socketReceiver.getData();		
 	}
