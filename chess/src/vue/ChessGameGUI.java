@@ -33,6 +33,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	Color boardColor;
 	ChessGameControlers chessGameControler;
 	JLayeredPane layeredPane;
 	JPanel chessBoard;
@@ -47,11 +48,12 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	int xAdjustment;
 	int yAdjustment;
 
-	public ChessGameGUI(ChessGameControler chessGameCtrl) {
+	public ChessGameGUI(ChessGameControler chessGameCtrl, Color boardColor) {
 		this.chessGameControler = chessGameCtrl;
 		this.chessBoardSize = new Dimension(600, 600);
 		this.infoBoardSize = new Dimension(400, 600);
 		this.boardSize = new Dimension(1000, 600);
+		this.boardColor = boardColor;
 
 		// Use a Layered Pane for this this application
 		initializeLayeredPane();
@@ -89,26 +91,9 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 			int row = (i / 8) % 2;
 			if (row == 0)
-				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
+				square.setBackground(i % 2 == 0 ? Color.white : boardColor);
 			else
-				square.setBackground(i % 2 == 0 ? Color.black : Color.white);
-			
-			
-			/***************************************************
-			 * DEBUG CODE
-			 * TO REMOVE LATER
-			 **************************************************/
-			
-			ChessGameControler cgc = (ChessGameControler) chessGameControler;
-
-			if (row == 0)
-				square.setBackground(i % 2 == 0 ? Color.white : (cgc.isServer ? Color.black : Color.blue));
-			else
-				square.setBackground(i % 2 == 0 ? (cgc.isServer ? Color.black : Color.blue) : Color.white);
-				
-			/***************************************************
-			 * 
-			 **************************************************/		
+				square.setBackground(i % 2 == 0 ? boardColor : Color.white);	
 			
 		}
 	}

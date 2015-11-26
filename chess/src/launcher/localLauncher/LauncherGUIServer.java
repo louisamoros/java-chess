@@ -1,5 +1,6 @@
 package launcher.localLauncher;
 
+import java.awt.Color;
 import java.util.Observer;
 
 import javax.swing.JFrame;
@@ -14,12 +15,14 @@ public class LauncherGUIServer {
 
 		final boolean isServer = true;
 		final Couleur couleur = Couleur.BLANC;
+		final Color boardColor = Color.black;
 
 		ChessGame chessGame = new ChessGame();
 
 		ChessGameControler chessGameControler = new ChessGameControler(
 				chessGame, isServer, couleur);
-		JFrame frame = new ChessGameGUI(chessGameControler);
+		
+		JFrame frame = new ChessGameGUI(chessGameControler, boardColor);
 
 		chessGame.addObserver((Observer) frame);
 		chessGame.notifyObservers();
