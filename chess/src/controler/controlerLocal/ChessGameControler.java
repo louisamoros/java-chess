@@ -14,11 +14,9 @@ import socket.SocketManager;
 public class ChessGameControler implements ChessGameControlers, Observer {
 
 	private ChessGame chessGame;
-	public boolean isServer;
+	private boolean isServer;
 	private Couleur couleur;
 	private SocketManager socketManager;
-	
-	private String data;
 
 	public ChessGameControler(ChessGame cG, boolean iS, Couleur c) {
 		super();
