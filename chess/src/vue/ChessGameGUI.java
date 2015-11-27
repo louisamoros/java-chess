@@ -72,7 +72,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		infoBoard.setPreferredSize(infoBoardSize);
 		infoBoard.setBounds(chessBoardSize.width, 0, infoBoardSize.width,
 				infoBoardSize.height);
-		infoBoard.setBackground(boardColor);
+		infoBoard.setBackground(Color.orange);
 		infoBoard.add(chessInfos);
 	}
 
