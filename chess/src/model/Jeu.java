@@ -5,18 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import tools.ChessPieceFactory;
-import tools.ChessSinglePieceFactory;
 
 /**
  * @author francoise.perrin
  * Inspiration Jacques SARAYDARYAN, Adrien GUENARD *
  */
 public class Jeu  {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	protected List<Pieces> pieces;
 	protected Couleur couleur;

@@ -2,13 +2,16 @@ package model;
 
 import java.io.Serializable;
 
-public class MoveCoords implements Serializable{
-	
+public class MoveCoords implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Coord initCoords;
 	private Coord finalCoords;
-	
-	public MoveCoords(Coord initCoords, Coord finalCoords)
-	{
+
+	public MoveCoords(Coord initCoords, Coord finalCoords) {
 		this.initCoords = initCoords;
 		this.finalCoords = finalCoords;
 	}

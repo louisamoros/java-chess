@@ -43,8 +43,8 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 	}
 
 	public void move(Coord coordInit, Coord coordFinal) {
-		
-		if(couleur.equals(getColorCurrentPlayer())) {
+
+		if (couleur.equals(getColorCurrentPlayer())) {
 			// Adapt coords
 			coordInit.x = coordInit.x / 75;
 			coordFinal.x = coordFinal.x / 75;
@@ -52,35 +52,35 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			coordFinal.y = coordFinal.y / 75;
 
 			MoveCoords moveCoords = new MoveCoords(coordInit, coordFinal);
-			socketManager.send((Object)moveCoords);
-			
+			socketManager.send((Object) moveCoords);
+
 			System.out.println("Move from " + coordInit + " to " + coordFinal);
-			chessGame.move(coordInit.x, coordInit.y, coordFinal.x, coordFinal.y);	
+			chessGame
+					.move(coordInit.x, coordInit.y, coordFinal.x, coordFinal.y);
 
 		} else {
 			// Simulate fake moving
 			System.out.println("Fake moving because it's not your turn.");
 			chessGame.move(-1, -1, -1, -1);
 		}
-		
+
 	}
-	
+
 	public void createSocket() {
 		socketManager = new SocketManager();
-		if(isServer) {
-			//instanciate socketio / server config
+		if (isServer) {
+			// instanciate socketio / server config
 			socketManager.socketConfig = new ServerSocketConfig();
 		} else {
-			//instanciate socketio / client config			
+			// instanciate socketio / client config
 			socketManager.socketConfig = new ClientSocketConfig();
 		}
-		
+
 		socketManager.config();
 		socketManager.socketReceiver.addObserver(this);
 	}
-	
-	public SocketManager getSocketManager()
-	{
+
+	public SocketManager getSocketManager() {
 		return this.socketManager;
 	}
 
@@ -88,12 +88,14 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 	public void update(Observable o, Object arg) {
 
 		MoveCoords moveCoords = (MoveCoords) arg;
-		
-		//make the opponent's move
-		chessGame.move(moveCoords.getInitCoords().x, moveCoords.getInitCoords().y, moveCoords.getFinalCoords().x, moveCoords.getFinalCoords().y);
-		System.out.println("Opponent moves from " + moveCoords.getInitCoords() + " to " + moveCoords.getFinalCoords());
-		
+
+		// make the opponent's move
+		chessGame.move(moveCoords.getInitCoords().x,
+				moveCoords.getInitCoords().y, moveCoords.getFinalCoords().x,
+				moveCoords.getFinalCoords().y);
+		System.out.println("Opponent moves from " + moveCoords.getInitCoords()
+				+ " to " + moveCoords.getFinalCoords());
+
 	}
 
-	
 }
