@@ -14,9 +14,10 @@ public class ServerSocketConfig implements SocketConfig{
 		Socket socket = null;
 		
 		try {
-			serverSocket = new ServerSocket(5000);
+			serverSocket = new ServerSocket(8080);
 			System.out.println("Server is ready.");
 			socket = serverSocket.accept();
+			System.out.println("connection accepted");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
