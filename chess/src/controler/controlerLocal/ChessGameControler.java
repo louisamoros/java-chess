@@ -1,5 +1,6 @@
 package controler.controlerLocal;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -64,6 +65,10 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 			chessGame.move(-1, -1, -1, -1);
 		}
 
+	}
+	
+	public void getValidMoves(Coord coords){	
+		chessGame.getValidMoves(coords);
 	}
 
 	public void createSocket() {

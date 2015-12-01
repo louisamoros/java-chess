@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -113,6 +114,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 		Point parentLocation = c.getParent().getLocation();
 		coordInit = new Coord(parentLocation.x, parentLocation.y);
+		
 		xAdjustment = parentLocation.x - e.getX();
 		yAdjustment = parentLocation.y - e.getY();
 		chessPiece = (JLabel) c;
@@ -168,42 +170,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 	@Override
 	public void update(Observable o, Object arg) {
-		JLabel piece;
-		JPanel panel;
 
-		LinkedList<PieceIHM> piecesList = (LinkedList<PieceIHM>) arg;
-
-		clearBoard();
-
-		for (PieceIHM currentPiece : piecesList) {
-			for (Coord coord : currentPiece.getList()) {
-				piece = new JLabel(new ImageIcon(
-						ChessImageProvider.getImageFile(
-								currentPiece.getTypePiece(),
-								currentPiece.getCouleur())));
-				int value = coord.x + 8 * coord.y;
-				panel = (JPanel) chessBoard.getComponent(value);
-				panel.add(piece);
-			}
-		}
-
-		chessBoard.revalidate();
-		chessBoard.repaint();
-
-		System.out.println(chessGameControler.getMessage());
-		String prepareStr = chessGameControler.getMessage() + "<br>"
-				+ chessInfos.getText();
-		chessInfos.setText("");
-		chessInfos.setText("<html>" + prepareStr + "</html>");
 
 	}
-
-	private void clearBoard() {
-		JPanel panel;
-
-		for (Component c : chessBoard.getComponents()) {
-			panel = (JPanel) c;
-			panel.removeAll();
-		}
-	}
+	
 }

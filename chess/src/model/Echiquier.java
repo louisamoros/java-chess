@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -346,6 +347,22 @@ public class Echiquier {
 			st +="\n";
 		}
 		return st;
+	}
+	
+	public List<Coord> getValidMoveCoord(Coord coords){
+		
+		List<Coord> coordsList = new ArrayList<Coord>();
+		
+		for(int i = 0; i < 7; i++){
+			for(int j = 0; j < 7; j++){
+				if(isMoveOk(coords.x, coords.x, i, j)){
+					//if move to [i,j] is possible, then add destination case to the list
+					coordsList.add(new Coord(i, j));
+				}
+			}
+		}
+
+		return coordsList;
 	}
 
 	/**

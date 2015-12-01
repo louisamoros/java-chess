@@ -11,8 +11,8 @@ public class ClientSocketConfig implements SocketConfig{
 		Socket socket = null;
 		
 		try {
-//			socket = new Socket("localhost", 5000);
-			socket = new Socket("192.168.0.29", 5000);
+			socket = new Socket("localhost", 5000);
+			//socket = new Socket("192.168.0.29", 5000);
 			System.out.println("Connection requested.");
 			return socket;
 		} catch (IOException e) {
