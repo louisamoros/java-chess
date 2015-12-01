@@ -72,21 +72,9 @@ public class ChessGameControler implements ChessGameControlers, Observer {
 	}
 
 	public void createSocket() {
-		socketManager = new SocketManager();
-		if (isServer) {
-			// instanciate socketio / server config
-			socketManager.socketConfig = new ServerSocketConfig();
-		} else {
-			// instanciate socketio / client config
-			socketManager.socketConfig = new ClientSocketConfig();
-		}
-
+		socketManager = new SocketManager(isServer);
 		socketManager.config();
-		socketManager.socketReceiver.addObserver(this);
-	}
-
-	public SocketManager getSocketManager() {
-		return this.socketManager;
+		socketManager.setObserver((Observer) this);
 	}
 
 	@Override

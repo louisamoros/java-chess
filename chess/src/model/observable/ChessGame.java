@@ -15,7 +15,6 @@ public class ChessGame extends Observable {
 
 	public ChessGame() {
 		super();
-		// creation de l'echiquier
 		echiquier = new Echiquier();
 	}
 
