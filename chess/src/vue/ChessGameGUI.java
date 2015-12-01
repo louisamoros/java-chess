@@ -26,6 +26,9 @@ import model.CommandsForUpdate;
 import model.Coord;
 import model.PieceIHM;
 import tools.ChessImageProvider;
+import vue.update.BoardUpdateBehavior;
+import vue.update.ColorValidMovesBehavior;
+import vue.update.UpdateBehaviors;
 import controler.controlerLocal.ChessGameControler;
 import controler.controlerLocal.ChessGameControlers;
 

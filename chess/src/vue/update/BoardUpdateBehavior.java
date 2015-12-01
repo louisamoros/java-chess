@@ -1,4 +1,4 @@
-package vue;
+package vue.update;
 
 import java.awt.Component;
 import java.util.List;
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import model.Coord;
 import model.PieceIHM;
 import tools.ChessImageProvider;
+import vue.ChessGameGUI;
 
 public class BoardUpdateBehavior implements UpdateBehaviors{
 	

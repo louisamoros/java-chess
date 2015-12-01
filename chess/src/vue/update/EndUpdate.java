@@ -1,7 +1,6 @@
 package vue.update;
 
 import vue.ChessGameGUI;
-import vue.UpdateBehaviors;
 
 public class EndUpdate implements UpdateBehaviors{
 

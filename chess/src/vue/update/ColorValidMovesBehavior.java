@@ -1,4 +1,4 @@
-package vue;
+package vue.update;
 
 import java.awt.Color;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import vue.ChessGameGUI;
 import model.Coord;
 import model.PieceIHM;
 

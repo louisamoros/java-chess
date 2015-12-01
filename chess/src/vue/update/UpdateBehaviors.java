@@ -1,4 +1,6 @@
-package vue;
+package vue.update;
+
+import vue.ChessGameGUI;
 
 public interface UpdateBehaviors {
 
