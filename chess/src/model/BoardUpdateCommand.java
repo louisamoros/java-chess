@@ -6,6 +6,10 @@ public class BoardUpdateCommand implements CommandsForUpdate{
 	
 	private List<PieceIHM> pieceIHMList;
 	private final String COMMAND = "BoardUpdate";
+	
+	public BoardUpdateCommand(List<PieceIHM> pieceIHMList) {
+		this.pieceIHMList = pieceIHMList;
+	}
 
 	@Override
 	public Object getAttribute() {

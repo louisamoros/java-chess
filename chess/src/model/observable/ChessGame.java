@@ -32,13 +32,13 @@ public class ChessGame extends Observable {
 			}
 		}
 		super.setChanged();
-		notifyObservers(new BoardUpdateCommand());
+		notifyObservers(new BoardUpdateCommand(echiquier.getPiecesIHM()));
 		return isOk;
 	}
 	
 	public void getValidMoves(Coord coords){
 		super.setChanged();
-		notifyObservers(new ColorValidMovesCommand());
+		notifyObservers(new ColorValidMovesCommand(echiquier.getValidMoveCoord(coords)));
 	}
 
 	public String toString() {
@@ -55,5 +55,10 @@ public class ChessGame extends Observable {
 
 	public String getMessage() {
 		return this.echiquier.getMessage();
+	}
+	
+	public void notifyObservers() {
+		super.setChanged();
+		super.notifyObservers(new BoardUpdateCommand(echiquier.getPiecesIHM()));
 	}
 }

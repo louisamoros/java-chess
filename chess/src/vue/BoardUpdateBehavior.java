@@ -1,7 +1,7 @@
 package vue;
 
 import java.awt.Component;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -12,14 +12,18 @@ import model.PieceIHM;
 import tools.ChessImageProvider;
 
 public class BoardUpdateBehavior implements UpdateBehaviors{
+	
+	private List<PieceIHM> piecesList;
+	
+	public BoardUpdateBehavior(Object piecesList) {
+		this.piecesList = (List<PieceIHM>)piecesList;
+	}
 
 
 	@Override
 	public void execute(ChessGameGUI gui) {
 		JLabel piece;
 		JPanel panel;
-
-		LinkedList<PieceIHM> piecesList = (LinkedList<PieceIHM>) arg;
 
 		clearBoard(gui);
 

@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import model.CommandsForUpdate;
 import model.Coord;
 import model.PieceIHM;
 import tools.ChessImageProvider;
@@ -115,6 +116,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		Point parentLocation = c.getParent().getLocation();
 		coordInit = new Coord(parentLocation.x, parentLocation.y);
 		
+		chessGameControler.getValidMoves(coordInit);
+		
 		xAdjustment = parentLocation.x - e.getX();
 		yAdjustment = parentLocation.y - e.getY();
 		chessPiece = (JLabel) c;
@@ -170,8 +173,36 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 	@Override
 	public void update(Observable o, Object arg) {
+		
+		CommandsForUpdate command = (CommandsForUpdate)arg;
+		UpdateBehaviors upd;
+		
+		System.out.println(command.getCommand());
+		
+		switch(command.getCommand()){
+		
+		case "ColorValidMoves":
+			upd = new ColorValidMovesBehavior(command.getAttribute());
+			break;
+		case "BoardUpdate":
+			upd = new BoardUpdateBehavior(command.getAttribute());
+			break;
+		default:
+			System.out.println("unknown model command");
+			return;	
+		}
 
-
+		/*if(command.getCommand().equals("ColorValidMoves"))
+			upd = new ColorValidMovesBehavior(command.getAttribute());
+		if(command.getCommand().equals("BoardUpdate"))
+			upd = new BoardUpdateBehavior(command.getAttribute());
+		else{
+			System.out.println("unknown model command");
+			return;
+		}*/
+		
+		upd.execute(this);
+	
 	}
 	
 }
