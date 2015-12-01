@@ -35,25 +35,25 @@ public class BoardUpdateBehavior implements UpdateBehaviors{
 								currentPiece.getTypePiece(),
 								currentPiece.getCouleur())));
 				int value = coord.x + 8 * coord.y;
-				panel = (JPanel) gui.chessBoard.getComponent(value);
+				panel = (JPanel) gui.getChessBoard().getComponent(value);
 				panel.add(piece);
 			}
 		}
 
-		gui.chessBoard.revalidate();
-		gui.chessBoard.repaint();
+		gui.getChessBoard().revalidate();
+		gui.getChessBoard().repaint();
 
-		System.out.println(gui.chessGameControler.getMessage());
-		String prepareStr = gui.chessGameControler.getMessage() + "<br>"
-				+ gui.chessInfos.getText();
-		gui.chessInfos.setText("");
-		gui.chessInfos.setText("<html>" + prepareStr + "</html>");
+		System.out.println(gui.getChessGameControler().getMessage());
+		String prepareStr = gui.getChessGameControler().getMessage() + "<br>"
+				+ gui.getChessInfos().getText();
+		gui.getChessInfos().setText("");
+		gui.getChessInfos().setText("<html>" + prepareStr + "</html>");
 	}
 	
 	private void clearBoard(ChessGameGUI gui) {
 		JPanel panel;
 
-		for (Component c : gui.chessBoard.getComponents()) {
+		for (Component c : gui.getChessBoard().getComponents()) {
 			panel = (JPanel) c;
 			panel.removeAll();
 		}
