@@ -24,11 +24,11 @@ import javax.swing.JPanel;
 
 import model.Coord;
 import model.PieceIHM;
-import model.notify.CommandsForUpdate;
+import model.notify.NotifyCommand;
 import tools.ChessImageProvider;
 import vue.update.BoardUpdateBehavior;
 import vue.update.ColorValidMovesBehavior;
-import vue.update.UpdateBehaviors;
+import vue.update.UpdateCommand;
 import controler.controlerLocal.ChessGameControler;
 import controler.controlerLocal.ChessGameControlers;
 
@@ -177,8 +177,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		CommandsForUpdate command = (CommandsForUpdate)arg;
-		UpdateBehaviors upd;
+		NotifyCommand command = (NotifyCommand)arg;
+		UpdateCommand upd;
 		
 		System.out.println(command.getCommand());
 		

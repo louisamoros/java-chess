@@ -1,6 +1,6 @@
 package model.notify;
 
-public interface CommandsForUpdate {
+public interface NotifyCommand {
 	
 	public String getCommand();
 	public Object getAttribute();

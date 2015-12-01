@@ -2,7 +2,7 @@ package vue.update;
 
 import vue.ChessGameGUI;
 
-public interface UpdateBehaviors {
+public interface UpdateCommand {
 
 	public void execute(ChessGameGUI gui);
 	

@@ -12,7 +12,7 @@ import model.PieceIHM;
 import tools.ChessImageProvider;
 import vue.ChessGameGUI;
 
-public class BoardUpdateBehavior implements UpdateBehaviors{
+public class BoardUpdateBehavior implements UpdateCommand{
 	
 	private List<PieceIHM> piecesList;
 	

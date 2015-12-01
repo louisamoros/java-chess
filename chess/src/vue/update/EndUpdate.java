@@ -2,7 +2,7 @@ package vue.update;
 
 import vue.ChessGameGUI;
 
-public class EndUpdate implements UpdateBehaviors{
+public class EndUpdate implements UpdateCommand{
 
 	@Override
 	public void execute(ChessGameGUI gui) {

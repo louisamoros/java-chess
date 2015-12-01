@@ -10,7 +10,7 @@ import vue.ChessGameGUI;
 import model.Coord;
 import model.PieceIHM;
 
-public class ColorValidMovesBehavior implements UpdateBehaviors{
+public class ColorValidMovesBehavior implements UpdateCommand{
 	
 	private List<Coord> coordsList;
 	

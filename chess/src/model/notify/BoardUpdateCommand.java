@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.PieceIHM;
 
-public class BoardUpdateCommand implements CommandsForUpdate{
+public class BoardUpdateCommand implements NotifyCommand{
 	
 	private List<PieceIHM> pieceIHMList;
 	private final String COMMAND = "BoardUpdate";

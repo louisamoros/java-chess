@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Coord;
 
-public class ColorValidMovesCommand implements CommandsForUpdate{
+public class ColorValidMovesCommand implements NotifyCommand{
 
 	private List<Coord> coordsList;
 	private final String COMMAND = "ColorValidMoves";
