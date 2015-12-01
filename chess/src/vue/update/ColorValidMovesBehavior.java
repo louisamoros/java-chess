@@ -26,7 +26,7 @@ public class ColorValidMovesBehavior implements UpdateCommand{
 
 		for (Coord coord : coordsList) {
 			int value = coord.x + 8 * coord.y;
-			panel = (JPanel) gui.chessBoard.getComponent(value);
+			panel = (JPanel) gui.getChessBoard().getComponent(value);
 			panel.setBackground(Color.red);
 		}
 		

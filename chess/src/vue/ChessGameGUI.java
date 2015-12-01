@@ -11,21 +11,16 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import model.Coord;
-import model.PieceIHM;
 import model.notify.NotifyCommand;
-import tools.ChessImageProvider;
 import vue.update.BoardUpdateBehavior;
 import vue.update.ColorValidMovesBehavior;
 import vue.update.UpdateCommand;
@@ -38,18 +33,32 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Color boardColor;
-	ChessGameControlers chessGameControler;
-	JLayeredPane layeredPane;
-	JPanel chessBoard;
-	JPanel infoBoard;
-	JLabel chessInfos = new JLabel();
-	JLabel chessPiece;
-	Dimension chessBoardSize;
-	Dimension infoBoardSize;
-	Dimension boardSize;
-	Coord coordInit;
-	Coord coordFinal;
+	private Color boardColor;
+	private ChessGameControlers chessGameControler;
+	private JLayeredPane layeredPane;
+	private JPanel chessBoard;
+	private JPanel infoBoard;
+	private JLabel chessInfos = new JLabel();
+	private JLabel chessPiece;
+	private Dimension chessBoardSize;
+	private Dimension infoBoardSize;
+	private Dimension boardSize;
+	private Coord coordInit;
+	
+	
+	public JLabel getChessInfos() {
+		return chessInfos;
+	}
+
+	public ChessGameControlers getChessGameControler() {
+		return chessGameControler;
+	}
+
+	public JPanel getChessBoard() {
+		return chessBoard;
+	}
+
+	private Coord coordFinal;
 	int xAdjustment;
 	int yAdjustment;
 
