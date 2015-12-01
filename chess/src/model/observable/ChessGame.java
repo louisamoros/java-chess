@@ -3,11 +3,11 @@ package model.observable;
 import java.util.List;
 import java.util.Observable;
 
-import model.BoardUpdateCommand;
-import model.ColorValidMovesCommand;
 import model.Coord;
 import model.Couleur;
 import model.Echiquier;
+import model.notify.BoardUpdateCommand;
+import model.notify.ColorValidMovesCommand;
 
 public class ChessGame extends Observable {
 

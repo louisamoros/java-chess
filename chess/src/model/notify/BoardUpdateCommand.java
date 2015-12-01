@@ -1,6 +1,8 @@
-package model;
+package model.notify;
 
 import java.util.List;
+
+import model.PieceIHM;
 
 public class BoardUpdateCommand implements CommandsForUpdate{
 	

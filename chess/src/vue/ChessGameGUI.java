@@ -22,9 +22,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import model.CommandsForUpdate;
 import model.Coord;
 import model.PieceIHM;
+import model.notify.CommandsForUpdate;
 import tools.ChessImageProvider;
 import vue.update.BoardUpdateBehavior;
 import vue.update.ColorValidMovesBehavior;
